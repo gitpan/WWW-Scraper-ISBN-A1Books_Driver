@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use vars qw($VERSION @ISA);
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 #--------------------------------------------------------------------------
 
@@ -121,11 +121,10 @@ sub search {
     $data->{weight} = int($data->{weight} * LB2G)   if($data->{weight});
     $data->{width}  = int($data->{width}  * IN2MM)  if($data->{width});
     $data->{height} = int($data->{height} * IN2MM)  if($data->{height});
-    $data->{author}         =~ s!<[^>]+>!!g         if($data->{author});
-    $data->{publisher}      =~ s!<[^>]+>!!g         if($data->{publisher});
+
     $data->{description}    =~ s!</?br\s*/?>!\n!gsi if($data->{description});
-    $data->{description}    =~ s!<[^>]+>!!gsi       if($data->{description});
     $data->{description}    =~ s!&nbsp;! !gsi       if($data->{description});
+    $data->{$_} =~ s!<[^>]+>!!g for(qw(author publisher description));
 
 #use Data::Dumper;
 #print STDERR "\n# " . Dumper($data);
@@ -199,7 +198,7 @@ be forthcoming, please feel free to (politely) remind me.
 
 =head1 COPYRIGHT & LICENSE
 
-  Copyright (C) 2004-2010 Barbie for Miss Barbell Productions
+  Copyright (C) 2010,2011 Barbie for Miss Barbell Productions
 
   This module is free software; you can redistribute it and/or
   modify it under the Artistic Licence v2.
