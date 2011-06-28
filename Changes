@@ -1,5 +1,9 @@
 Revision history for Perl extension WWW-Scraper-ISBN-A1Books_Driver.
 
+0.05    28/06/2011
+        - upgraded to Test::CPAN::Meta::JSON for tests.
+        - added check for 'site down for maintenance'.
+
 0.04    14/02/2011
         - amended pingtest() in network tests.
         - added further skip test if test books are withdrawn from the site.

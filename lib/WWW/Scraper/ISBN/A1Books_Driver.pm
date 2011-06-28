@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use vars qw($VERSION @ISA);
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 #--------------------------------------------------------------------------
 
@@ -98,7 +98,10 @@ sub search {
 	# The Book page
     my $html = $mech->content();
 
-	return $self->handler("Failed to find that book on A1Books website.")
+    return $self->handler("A1Books website appears to be unavailable.")
+		if($html =~ m!Site down for maintenance!si);
+
+    return $self->handler("Failed to find that book on A1Books website.")
 		if($html =~ m!No results found.!si);
     
 #print STDERR "\n# content1=[\n$html\n]\n";
